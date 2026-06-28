@@ -17,6 +17,8 @@ on:
         - DEV
         required: true
         default: DEV
+  schedule:
+    - cron: '*/2 * * * *' # Runs every day at midnight
   
 env:
   CI: true
