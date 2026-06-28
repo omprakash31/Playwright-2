@@ -1,6 +1,8 @@
 
 name: Playwright Tests
 on:
+  schedule:
+    - cron: '*/2 * * * *' # Runs every day at midnight
   push:
     branches: [main, develop,release]
   pull_request:
@@ -17,8 +19,7 @@ on:
         - DEV
         required: true
         default: DEV
-  schedule:
-    - cron: '*/2 * * * *' # Runs every day at midnight
+  
   
 env:
   CI: true
