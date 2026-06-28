@@ -13,6 +13,15 @@ on:
         description: ENVIRONMENT
         type: choice
         options:
+        - smoke
+        - regression
+        - critical
+        required: true
+        default: smoke
+      Tags:    
+        description: Tags
+        type: choice
+        options:
         - QA
         - PROD
         - DEV
@@ -39,3 +48,5 @@ jobs:
         run: npx playwright install --with-deps
       - name: run playwright test
         run: npx playwright test
+      - name: run test with tags
+        run: npx playwright test --grep @${{inputs.Tags || 'smoke'}}
