@@ -8,7 +8,7 @@ on:
       - main
 env:
   CI: true
-  ENVIRON: {{github.secrets.ENVIRON}}
+  ENVIRON: ${{ secrets.ENVIRON }}
 jobs:
   Job1:
     runs-on: ubuntu-latest
