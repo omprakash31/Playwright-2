@@ -8,12 +8,11 @@ on:
       - main
 env:
   CI: true
-  ENVIRON: ${{ vars.ENVIRON }}
-  QA: ${{ vars.QA }}
+  URL: ${{ vars.URL }}
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    environment: QA
+    environment: ${{ vars.ENVIRON }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
