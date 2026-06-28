@@ -1,22 +1,26 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv'
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
-
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
 
-if(!process.env.CI)
-  {
-    dotenv.config({ path: '.env' });
-  }
+import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
+
+/**
+ * Load environment file according to `ENVIRON` (e.g. QA, DEV, PROD).
+ * Falls back to `.env` if specific file is missing.
+ */
+
+const envName = (process.env.ENVIRON || '').toString();
+const candidate = envName ? path.resolve(__dirname, `.env.${envName.toUpperCase()}`) : path.resolve(__dirname, '.env');
+if (fs.existsSync(candidate)) {
+  dotenv.config({ path: candidate });
+} else {
+  const fallback = path.resolve(__dirname, '.env');
+  if (fs.existsSync(fallback)) dotenv.config({ path: fallback });
+}
 
 
 
@@ -36,8 +40,7 @@ export default defineConfig({
   use: {
   
     /* Base URL to use in actions like `await page.goto('')`. */
-    // @ts-ignore
-    baseURL: process.env.URL,
+    baseURL: process.env.URL || 'https://playwright.dev/',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
