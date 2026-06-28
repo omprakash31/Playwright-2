@@ -9,8 +9,8 @@ on:
       - main
   workflow_dispatch:
     inputs:    
-      ENVR:    
-        description: ENVIRONMENT
+      Tags:    
+        description: TAGS
         type: choice
         options:
         - smoke
@@ -18,8 +18,8 @@ on:
         - critical
         required: true
         default: smoke
-      Tags:    
-        description: Tags
+      ENVR:    
+        description: Environment
         type: choice
         options:
         - QA
