@@ -6,14 +6,26 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:    
+      ENVR:    
+        description: ENVIRONMENT
+        type: choice
+        options:
+        - QA
+        - PROD
+        - DEV
+        required: true
+        default: DEV
+  
 env:
   CI: true
-  QA_URL: "https://unstop.com/jobs/analyst-technical-support-deloitte-649014"
-  DEV_URL: "https://www.careerpower.in/ssc-calendar.html"
-  Prod_URL: "https://playwright.dev/"
+  URL: ${{ vars.URL }}
+  # ENVIRON: ${{ github.event.inputs.ENVR || 'QA' }} 
 jobs:
   Job1:
     runs-on: ubuntu-latest
+    environment: ${{inputs.ENVR || vars.ENVIRON }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -25,4 +37,3 @@ jobs:
         run: npx playwright install --with-deps
       - name: run playwright test
         run: npx playwright test
-      
