@@ -2,7 +2,7 @@ name: Schedule Test
 
 on:
   schedule:
-    - cron: "*/3 * * * *"
+    - cron: "45 23 * * *"
   push:
     branches: [main]
 jobs:
