@@ -2,8 +2,9 @@ name: Schedule Test
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
-
+    - cron: "*/3 * * * *"
+  push:
+    branches: [main]
 jobs:
   test:
     runs-on: ubuntu-latest
