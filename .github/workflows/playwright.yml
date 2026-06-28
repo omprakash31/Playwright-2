@@ -9,6 +9,7 @@ on:
 env:
   CI: true
   ENVIRON: ${{ vars.ENVIRON }}
+  QA: ${{ vars.QA }}
 jobs:
   Job1:
     runs-on: ubuntu-latest
