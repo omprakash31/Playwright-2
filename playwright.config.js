@@ -1,6 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
-
+import dotenv from 'dotenv'
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -13,12 +13,12 @@ import { defineConfig, devices } from '@playwright/test';
  * @see https://playwright.dev/docs/test-configuration
  */
 
-const env= process.env.ENVIRON || "QA";
-const urls= {
-  "QA": "https://unstop.com/jobs/analyst-technical-support-deloitte-649014",
-  "DEV": "https://www.careerpower.in/ssc-calendar.html",
-  "PROD": "https://playwright.dev/"
-};
+if(!process.env.CI)
+  {
+    dotenv.config({ path: '.env' });
+  }
+
+
 
 export default defineConfig({
   testDir: './tests',
@@ -37,7 +37,7 @@ export default defineConfig({
   
     /* Base URL to use in actions like `await page.goto('')`. */
     // @ts-ignore
-    baseURL: urls[env],
+    baseURL: process.env[`${process.env.ENVIRON}`],
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
@@ -50,15 +50,15 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {

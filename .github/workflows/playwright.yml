@@ -8,7 +8,7 @@ on:
       - main
 env:
   CI: true
-  ENVIRON: UAT
+  ENVIRON: DEV
 jobs:
   Job1:
     runs-on: ubuntu-latest
