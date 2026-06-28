@@ -6,13 +6,26 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
+    inputs:    
+      ENVR:    
+        description: ENVIRONMENT
+        type: choice
+        options:
+        - QA
+        - PROD
+        - DEV
+        required: true
+        default: DEV
+  
 env:
   CI: true
   URL: ${{ vars.URL }}
+  # ENVIRON: ${{ github.event.inputs.ENVR || 'QA' }} 
 jobs:
   Job1:
     runs-on: ubuntu-latest
-    environment: ${{ vars.ENVIRON }}
+    environment: ${{inputs.ENVR || vars.ENVIRON }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,4 +37,3 @@ jobs:
         run: npx playwright install --with-deps
       - name: run playwright test
         run: npx playwright test
-      
