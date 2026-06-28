@@ -8,9 +8,7 @@ on:
       - main
 env:
   CI: true
-  QA_URL: "https://unstop.com/jobs/analyst-technical-support-deloitte-649014"
-  DEV_URL: "https://www.careerpower.in/ssc-calendar.html"
-  Prod_URL: "https://playwright.dev/"
+  ENVIRON: UAT
 jobs:
   Job1:
     runs-on: ubuntu-latest
