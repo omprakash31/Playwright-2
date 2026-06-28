@@ -12,6 +12,7 @@ env:
 jobs:
   Job1:
     runs-on: ubuntu-latest
+    environment: QA
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
