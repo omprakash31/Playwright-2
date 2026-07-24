@@ -43,6 +43,7 @@ jobs:
         run: |
           npx playwright install --with-deps
           echo "om=myvalue" >> $GITHUB_OUTPUT
+          echo ${{jobs.Job1.outputs.sahoo}}
       - name: run playwright test
         run: npx playwright test
 
