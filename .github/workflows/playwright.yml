@@ -48,7 +48,7 @@ jobs:
         id: install-playwright
         run: |
           npx playwright install --with-deps
-          echo "om=myvalue" >> $GITHUB_OUTPUT
+          echo "om=${{matrix.name}}" >> $GITHUB_OUTPUT
       - name: run playwright test
         run: npx playwright test
 
