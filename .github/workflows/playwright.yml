@@ -41,7 +41,7 @@ jobs:
       - name: install playwright browser
         id: install-playwright
         run: npx playwright install --with-deps
-        run: echo "om:myvalue" >> $GITHUB_OUTPUT
+          echo "om:myvalue" >> $GITHUB_OUTPUT
       - name: run playwright test
         run: npx playwright test
 
