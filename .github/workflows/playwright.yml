@@ -31,6 +31,12 @@ jobs:
     outputs:
       sahoo: ${{steps.install-playwright.outputs.om}}
     environment: ${{inputs.ENVR || vars.ENVIRON }}
+    strategy:
+      matrix:
+        name:
+         - lol
+         - lol1
+         - lol2
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
