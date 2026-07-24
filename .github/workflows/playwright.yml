@@ -28,6 +28,25 @@ env:
 jobs:
   Job1:
     runs-on: ubuntu-latest
+    outputs:
+      sahoo: ${{steps.install-playwright.outputs.om}}
+    environment: ${{inputs.ENVR || vars.ENVIRON }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: install library
+        run: npm ci
+      - name: install playwright browser
+        id: install-playwright
+        run: npx playwright install --with-deps
+        run: echo "om:myvalue" >> $GITHUB_OUTPUT
+      - name: run playwright test
+        run: npx playwright test
+
+  Job2:
+    runs-on: ubuntu-latest
     environment: ${{inputs.ENVR || vars.ENVIRON }}
     steps:
       - uses: actions/checkout@v4
@@ -39,4 +58,5 @@ jobs:
       - name: install playwright browser
         run: npx playwright install --with-deps
       - name: run playwright test
-        run: npx playwright test
+        run: npx playwright test --project=chrome
+      
