@@ -58,8 +58,8 @@ jobs:
       - name: install library
         run: npm ci
       - name: install playwright browser
-        run: npx playwright install --with-deps
         run: |
+          npx playwright install --with-deps
           echo "${{needs.Job1.outputs.sahoo}}"
       - name: run playwright test
         run: npx playwright test --project=chromium
