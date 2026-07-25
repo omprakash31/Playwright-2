@@ -30,6 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       sahoo: ${{steps.install-playwright.outputs.om}}
+      sahoo1: ${{steps.install-playwright.outputs.om1}}
     environment: ${{inputs.ENVR || vars.ENVIRON }}
     strategy:
       matrix:
@@ -50,6 +51,7 @@ jobs:
         run: |
           npx playwright install --with-deps
           echo "om=${{matrix.name}}" >> $GITHUB_OUTPUT
+          echo "om1=${{matrix.shard}}" >> $GITHUB_OUTPUT
       - name: run playwright test
         run: npx playwright test --shard=${{matrix.shard}}/3
 
@@ -68,6 +70,7 @@ jobs:
         run: |
           npx playwright install --with-deps
           echo "${{needs.Job1.outputs.sahoo}}"
+          echo "${{needs.Job1.outputs.sahoo1}}"
       - name: run playwright test
         run: npx playwright test --project=chromium
       - name: upload the results
