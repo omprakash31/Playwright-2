@@ -11,7 +11,40 @@ test('has title', async ({ page },testInfo) => {
   // await expect(page).toHaveTitle(/Playwright/);
 });
 
-test('get started link', async ({ page },testInfo) => {
+test('get started link4', async ({ page },testInfo) => {
+  // await page.goto(`${testInfo.project.use.baseURL}`);
+  await page.goto('/');
+
+  // Click the get started link.
+  // await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  // await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+
+test('get started link3', async ({ page },testInfo) => {
+  // await page.goto(`${testInfo.project.use.baseURL}`);
+  await page.goto('/');
+
+  // Click the get started link.
+  // await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  // await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+
+test('get started link2', async ({ page },testInfo) => {
+  // await page.goto(`${testInfo.project.use.baseURL}`);
+  await page.goto('/');
+
+  // Click the get started link.
+  // await page.getByRole('link', { name: 'Get started' }).click();
+
+  // Expects page to have a heading with the name of Installation.
+  // await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+});
+
+test('get started link1', async ({ page },testInfo) => {
   // await page.goto(`${testInfo.project.use.baseURL}`);
   await page.goto('/');
 

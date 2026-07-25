@@ -37,6 +37,7 @@ jobs:
          - lol
          - lol1
          - lol2
+        shard: [1,2,3]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -50,7 +51,7 @@ jobs:
           npx playwright install --with-deps
           echo "om=${{matrix.name}}" >> $GITHUB_OUTPUT
       - name: run playwright test
-        run: npx playwright test
+        run: npx playwright test --shard=${{matrix.shard}}/3
 
   Job2:
     runs-on: ubuntu-latest
