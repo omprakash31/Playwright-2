@@ -3,11 +3,11 @@ name: Playwright Tests
 on:
   schedule:
     - cron: '*/2 * * * *' # Runs every day at midnight
-  push:
-    branches: [main, develop,release]
-  pull_request:
-    branches:
-      - main
+  # push:
+  #   branches: [main, develop,release]
+  # pull_request:
+  #   branches:
+  #     - main
   workflow_dispatch:
     inputs:    
       ENVR:    
@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       sahoo: ${{steps.install-playwright.outputs.om}}
-      sahoo1: ${{steps.install-playwright.outputs.om2}}
+      sahoo1: ${{steps.install-playwright.outputs.om1}}
     environment: ${{inputs.ENVR || vars.ENVIRON }}
     strategy:
       matrix:
@@ -38,11 +38,7 @@ jobs:
          - lol
          - lol1
          - lol2
-        name2:
-         - lol3
-         - lol4
-         - lol5
-        # shard: [1,2]
+        shard: [1,2]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -55,10 +51,9 @@ jobs:
         run: |
           npx playwright install --with-deps
           echo "om=${{matrix.name}}" >> $GITHUB_OUTPUT
-          echo "om2=${{matrix.name2}}" >> $GITHUB_OUTPUT
+          echo "om1=${{matrix.shard}}" >> $GITHUB_OUTPUT
       - name: run playwright test
         run: npx playwright test --shard=${{matrix.shard}}/2
-
   Job2:
     runs-on: ubuntu-latest
     needs: Job1
@@ -84,6 +79,3 @@ jobs:
           path: |
             test-results/
             playwright-report/
-
-      
-      

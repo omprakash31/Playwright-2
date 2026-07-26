@@ -1,0 +1,37 @@
+
+name: Playwright Tests
+on:
+  push:
+    branches: [main, develop,release]
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:    
+      ENVR:    
+        description: ENVIRONMENT
+        type: choice
+        options:
+        - QA
+        - PROD
+        - DEV
+        required: true
+        default: DEV
+  
+  
+env:
+  CI: true
+  URL: ${{ vars.URL }}
+  # ENVIRON: ${{ github.event.inputs.ENVR || 'QA' }} 
+jobs:
+  Job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build Docker Image
+        run: docker build -t playwright-framework .
+
+      - name: Run Regression
+        run: docker run playwright-framework npx playwright test
