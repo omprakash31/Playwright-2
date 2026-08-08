@@ -1,4 +1,3 @@
-
 name: Playwright Tests
 on:
   schedule:
@@ -10,8 +9,17 @@ on:
   #     - main
   workflow_dispatch:
     inputs:    
+      Tags:    
+        description: TAGS
+        type: choice
+        options:
+        - smoke
+        - regression
+        - critical
+        required: true
+        default: smoke
       ENVR:    
-        description: ENVIRONMENT
+        description: Environment
         type: choice
         options:
         - QA
